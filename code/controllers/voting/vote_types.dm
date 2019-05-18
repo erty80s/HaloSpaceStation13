@@ -106,26 +106,24 @@
 /datum/vote/gamemode/do_result()
 	. = ..()
 
-	var/restart = 0
 	if(master_mode != .[1])
 		world.save_mode(.[1])
-		if(ticker && ticker.mode)
-			restart = 1
-		else
-			master_mode = .[1]
 	secondary_mode = .[2]
 	tertiary_mode = .[3]
 
 	if(ticker.current_state == GAME_STATE_PREGAME)
+		master_mode = .[1]
 		to_world("<span class='danger'>The round will start soon.</span>")
+	else
+		to_world("<span class='danger'>The gamemode vote result will apply next round.</span>")
 
-	if(restart)
+	/*if(round_started)
 		feedback_set_details("end_error","restart vote")
 		to_world("<span class='danger'>World restarting due to vote...</span>")
 		if(blackbox)	blackbox.save_all_data_to_sql()
 		sleep(50)
 		log_game("Rebooting due to restart vote")
-		world.Reboot()
+		world.Reboot()*/
 
 /datum/vote/gamemode/announce_vote(var/announce_text)
 	. = ..()
@@ -138,8 +136,52 @@
 	pregame_vote = 0
 
 
-/* CREW TRANSFER */
 
+/* END ROUND EARLY */
+//a generic replacement for crew transfer vote, use this instead
+/datum/vote/end_round_early
+	name = "end_round_early"
+	question = "End the round early?"
+	choices = list("End Round Early", "Continue The Round")
+
+/datum/vote/end_round_early/Initialize()
+	..()
+
+	if(!config.allow_vote_restart)
+		disabled = 1
+		disable_reason = "disabled in config"
+
+/datum/vote/end_round_early/calculate_result()
+	//default-vote for everyone who didn't vote
+	if(!config.vote_no_default)
+		var/non_voters = (GLOB.clients.len - total_votes)
+		if(non_voters > 0)
+			var/factor = 0.5
+			switch(world.time / (10 * 60)) // minutes
+				if(0 to 60)
+					factor = 0.5
+				if(61 to 120)
+					factor = 0.8
+				if(121 to 240)
+					factor = 1
+				if(241 to 300)
+					factor = 1.2
+				else
+					factor = 1.4
+			choices["End Round Early"] = round(choices["End Round Early"] * factor)
+			to_world("<font color='purple'>Time multiplier factor: [factor]</font>")
+	. = ..()
+
+/datum/vote/end_round_early/do_result()
+	. = ..()
+
+	if(.[1] == "End Round Early")
+		evacuation_controller.finish_evacuation()
+
+
+
+/* CREW TRANSFER */
+//don't use this, we're not on a single ship or station any more
 /datum/vote/crew_transfer
 	name = "crew_transfer"
 	question = "End the shift?"
@@ -274,18 +316,44 @@
 
 /datum/vote/mapswitch
 	name = "mapswitch"
+	var/status_quo = "Do not switch"
+	var/list/map_options = list()
 
 /datum/vote/mapswitch/Initialize()
-	..()
+	. = ..()
 
 	if(!config.allow_map_switching)
 		disabled = 1
 		disable_reason = "disabled in config"
 
+/datum/vote/mapswitch/initiate_vote(var/initiator_key, var/automatic = 0)
+	choices = list()
+	var/list/Lines = file2list("switchable_maps")
+
+	if(!Lines)
+		to_world("ERROR: unable to find \'switchable_maps\'")
+
+	for(var/t in Lines)
+		if(t)
+			choices.Add(t)
+	choices.Add(status_quo)
+	reset_choices()
+
+	. = ..()
+
 /datum/vote/mapswitch/do_result()
-	var/datum/map/M = GLOB.all_maps[.[1]]
-	fdel("use_map")
-	text2file(M.path, "use_map")
+	. = ..()
+
+	var/new_map = .[1]
+	if(new_map == status_quo)
+		return
+
+	to_world("<span class='danger'>>World restarting to \'[new_map]\' map due to mapswitch vote...</span>")
+	feedback_set_details("end_error","map vote")
+	log_game("Rebooting due to mapswitch vote")
+
+	sleep(50)
+	switch_maps(new_map)
 
 
 

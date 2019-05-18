@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_SMALL
 
 	var/is_active = 0
-	var/time_to_expire = 30 SECONDS
+	var/time_to_expire = 5 MINUTES
 	var/time_expire_at = 0
 
 /obj/item/drop_pod_beacon/New()
@@ -33,6 +33,8 @@
 	user.visible_message("<span class = 'notice'>[user] primes [src], activating the tracking module!</span>")
 	GLOB.processing_objects += src
 	icon_state = "[initial(icon_state)]_on"
+	is_active = 1
+	time_expire_at = world.time + time_to_expire
 
 /obj/item/drop_pod_beacon/examine(var/mob/examiner)
 	. = ..()

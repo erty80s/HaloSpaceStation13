@@ -5,7 +5,6 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 
 /mob/living/carbon/human/covenant/jiralhanae/New(var/new_loc)
 	..(new_loc,"Jiralhanae")
-	faction = "Covenant"
 
 /datum/language/doisacci
 	name = "Doisacci"
@@ -226,8 +225,6 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	item_state_slots = list(
 		slot_l_hand_str = "flag_blue_left",
 		slot_r_hand_str = "flag_blue_right" )
-
-
 
 #undef JIRALHANAE_ICON_PATH_MOB
 #undef JIRALHANAE_ICON_PATH_OBJ

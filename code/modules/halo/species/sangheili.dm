@@ -7,7 +7,7 @@
 		backbone of the Covenant for almost the entirety of its existence. They had a very strong \
 		rivalry with the upstart, crude Jiralhanae."
 	flesh_color = "#4A4A64"
-	blood_color = "#4A4A64"
+	blood_color = "#AB36AF"
 	icobase = 'code/modules/halo/icons/species/r_elite.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/icons/species/r_elite.dmi'
 	icon_template = 'code/modules/halo/icons/species/Sangheili_template.dmi'
@@ -18,15 +18,16 @@
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.9
-	pain_mod = 0.75 //Pain has half an effect on them.
-	slowdown = -1 //negates noshoes
+	pain_mod = 0.75 //Pain has quarter an effect on them
+	slowdown = -0.5
 	pixel_offset_x = -8
-	item_icon_offsets = list(0,2)
+	item_icon_offsets = list(16,0)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
+	default_faction = "Covenant"
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,
-	"second heart" =	 /obj/item/organ/heart_secondary,
+	"second heart" =	 /obj/item/organ/internal/heart_secondary,
 	BP_LUNGS =    /obj/item/organ/internal/lungs,
 	BP_LIVER =    /obj/item/organ/internal/liver,
 	BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
@@ -37,6 +38,19 @@
 
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
+
+	pain_scream_sounds = list(\
+	'code/modules/halo/sounds/species_pain_screams/elitescream_1.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_2.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_3.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_4.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_5.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_6.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_7.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_8.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_9.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_10.ogg',
+	'code/modules/halo/sounds/species_pain_screams/elitescream_11.ogg')
 
 /datum/species/sangheili/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return

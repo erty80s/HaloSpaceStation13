@@ -26,8 +26,11 @@
 /area/covenant_corvette/mainmedicalbay
 	name = "SDV Vindicative Infraction Main Medical Bay"
 
-/area/covenant_corvette/yanmee
-	name = "SDV Vindicative Infraction Yanme'e Quarters"
+/area/covenant_corvette/escape_port
+	name = "SDV Vindicative Infraction Escape Pods Port"
+
+/area/covenant_corvette/escape_starboard
+	name = "SDV Vindicative Infraction Escape Pods Starboard"
 
 /area/covenant_corvette/forwardcargo
 	name = "SDV Vindicative Infraction Forward Cargo Bay"
@@ -53,6 +56,9 @@
 /area/covenant_corvette/holdingcell
 	name = "SDV Vindicative Infraction Holding Cells"
 
+/area/covenant_corvette/toolstore
+	name = "SDV Vindicative Infraction Tool Storage"
+
 /area/covenant_corvette/centralengine
 	name = "SDV Vindicative Infraction Central Engine"
 
@@ -65,3 +71,5 @@
 //Weapon areas
 /area/covenant_corvette/pulse_lasersstarboard
 /area/covenant_corvette/pulse_lasersport
+
+/area/covenant_corvette/plastorps

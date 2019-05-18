@@ -285,6 +285,8 @@
 			return global.button_sound;
 		if("cable_list")
 			return global.cable_list;
+		if("cable_list_late_init")
+			return global.cable_list_late_init;
 		if("cached_icons")
 			return global.cached_icons;
 		if("cached_space")
@@ -653,6 +655,8 @@
 			return global.lobby_image;
 		if("log_end")
 			return global.log_end;
+		if("loot_distributor")
+			return global.loot_distributor;
 		if("loyalists")
 			return global.loyalists;
 		if("lunchables_drink_reagents_")
@@ -1512,6 +1516,8 @@
 			global.button_sound=newval;
 		if("cable_list")
 			global.cable_list=newval;
+		if("cable_list_late_init")
+			global.cable_list_late_init=newval;
 		if("cached_icons")
 			global.cached_icons=newval;
 		if("cached_space")
@@ -1880,6 +1886,8 @@
 			global.lobby_image=newval;
 		if("log_end")
 			global.log_end=newval;
+		if("loot_distributor")
+			global.loot_distributor=newval;
 		if("loyalists")
 			global.loyalists=newval;
 		if("lunchables_drink_reagents_")
@@ -2596,6 +2604,7 @@
 	"breach_burn_descriptors",
 	"button_sound",
 	"cable_list",
+	"cable_list_late_init",
 	"cached_icons",
 	"cached_space",
 	"camera_alarm",
@@ -2780,6 +2789,7 @@
 	"loadout_categories",
 	"lobby_image",
 	"log_end",
+	"loot_distributor",
 	"loyalists",
 	"lunchables_drink_reagents_",
 	"lunchables_drinks_",

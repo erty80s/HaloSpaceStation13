@@ -9,7 +9,7 @@
 		If they are hurt or angry enough, they can enter a beserk rage where they are \
 		near immune to pain and damage."
 	flesh_color = "#4A4A64"
-	blood_color = "#A10808"
+	blood_color = "#E61A65"
 	icobase = 'code/modules/halo/icons/species/jiralhanae_mob.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/icons/species/jiralhanae_mob.dmi'
 	icon_template = 'code/modules/halo/icons/species/jiralhanae_template.dmi'
@@ -22,6 +22,7 @@
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.9
+	default_faction = "Covenant"
 
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
